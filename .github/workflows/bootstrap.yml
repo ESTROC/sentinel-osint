@@ -3,7 +3,7 @@ name: Bootstrap source
 on:
   push:
     paths:
-      - ".bootstrap/source.b64"
+      - ".bootstrap/chunk5"
 
 permissions:
   contents: write
@@ -19,7 +19,7 @@ jobs:
         run: |
           rm -rf /tmp/sentinel-source /tmp/sentinel-source.zip
           mkdir -p /tmp/sentinel-source
-          base64 --decode .bootstrap/source.b64 > /tmp/sentinel-source.zip
+          cat .bootstrap/chunk1 .bootstrap/chunk2 .bootstrap/chunk3 .bootstrap/chunk4 .bootstrap/chunk5 | base64 --decode > /tmp/sentinel-source.zip
           unzip -q /tmp/sentinel-source.zip -d /tmp/sentinel-source
           rsync -a /tmp/sentinel-source/sentinel-osint-production/ ./ --exclude '.git'
           rm -rf .bootstrap
