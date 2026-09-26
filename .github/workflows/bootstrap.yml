@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - ".bootstrap/chunk5"
+      - ".github/workflows/bootstrap.yml"
 
 permissions:
   contents: write
@@ -19,7 +20,8 @@ jobs:
         run: |
           rm -rf /tmp/sentinel-source /tmp/sentinel-source.zip
           mkdir -p /tmp/sentinel-source
-          cat .bootstrap/chunk1 .bootstrap/chunk2 .bootstrap/chunk3 .bootstrap/chunk4 .bootstrap/chunk5 | base64 --decode > /tmp/sentinel-source.zip
+          cat .bootstrap/chunk1 .bootstrap/chunk2 .bootstrap/chunk3 .bootstrap/chunk4 .bootstrap/chunk5 | base64 --decode --ignore-garbage > /tmp/sentinel-source.zip
+          unzip -t /tmp/sentinel-source.zip
           unzip -q /tmp/sentinel-source.zip -d /tmp/sentinel-source
           rsync -a /tmp/sentinel-source/sentinel-osint-production/ ./ --exclude '.git'
           rm -rf .bootstrap
