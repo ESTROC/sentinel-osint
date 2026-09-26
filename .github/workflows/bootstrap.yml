@@ -37,3 +37,4 @@ jobs:
             git commit -m "feat: publish SentinelOSINT full-stack platform"
             git push origin HEAD:main
           fi
+# retry after archive repair
