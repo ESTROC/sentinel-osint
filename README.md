@@ -1,5 +1,10 @@
 # SentinelOSINT
 
+[![CI](https://github.com/ESTROC/sentinel-osint/actions/workflows/ci.yml/badge.svg)](https://github.com/ESTROC/sentinel-osint/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+![Next.js](https://img.shields.io/badge/Next.js-15-black)
+![FastAPI](https://img.shields.io/badge/FastAPI-Python-009688)
+
 **Defensive open-source security intelligence and situational-awareness workbench.**
 
 [![CI](https://github.com/ESTROC/sentinel-osint/actions/workflows/ci.yml/badge.svg)](https://github.com/ESTROC/sentinel-osint/actions/workflows/ci.yml)
@@ -217,6 +222,10 @@ The GitHub Actions workflow runs Python tests, TypeScript checks, and a producti
 **Data:** PostgreSQL via Psycopg; in-memory demo fallback  
 **Deployment:** Vercel frontend + Vercel Python backend  
 **Quality:** Pytest, GitHub Actions, typed models, documented analyst methodology
+
+## Author
+
+**Ayush Tripathi** · [LinkedIn](https://www.linkedin.com/in/cdtayush/) · [GitHub](https://github.com/ESTROC)
 
 ## License
 
