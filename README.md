@@ -7,8 +7,6 @@
 
 **Defensive open-source security intelligence and situational-awareness workbench.**
 
-[![CI](https://github.com/ESTROC/sentinel-osint/actions/workflows/ci.yml/badge.svg)](https://github.com/ESTROC/sentinel-osint/actions/workflows/ci.yml)
-
 SentinelOSINT turns public security signals into a structured analyst workflow: **collect → normalize → assess → corroborate → document → monitor / escalate**.
 
 It is built as a portfolio-grade full-stack system with a **Next.js analyst interface**, **FastAPI intelligence API**, source attribution, transparent scoring, analyst triage, evidence tracking, audit history, incident briefs, and optional **serverless PostgreSQL** persistence.
