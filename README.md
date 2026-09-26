@@ -13,6 +13,34 @@ It is built as a portfolio-grade full-stack system with a **Next.js analyst inte
 
 > **Scope:** defensive OSINT and security-event monitoring only. Synthetic scenarios are clearly marked. Open-web discovery is never treated as verified by default, and the project does not target private individuals or bypass access controls.
 
+## Interface preview
+
+The screenshots below are generated from the actual Next.js frontend in a clean Chromium CI environment, so the repository preview stays synchronized with the UI.
+
+### Operations dashboard
+
+![SentinelOSINT operations dashboard](docs/screenshots/operations-dashboard-desktop.jpg)
+
+The main analyst view combines operational KPIs, a situational map, transparent prioritization, source coverage, and a searchable incident queue.
+
+### Analyst event review
+
+![SentinelOSINT analyst event detail](docs/screenshots/analyst-event-detail.jpg)
+
+Event records expose source context, confidence, proximity, escalation state, analyst verification, evidence handling, audit history, and a structured incident brief.
+
+### Methodology and ethics
+
+![SentinelOSINT methodology and ethics](docs/screenshots/methodology-and-ethics.jpg)
+
+The methodology view documents the distinction between discovery, verification, confidence, priority, and analyst judgment.
+
+### Responsive mobile view
+
+<p align="center">
+  <img src="docs/screenshots/operations-dashboard-mobile.jpg" alt="SentinelOSINT mobile operations dashboard" width="390" />
+</p>
+
 ## What it demonstrates
 
 Security teams rarely need another feed. They need a repeatable process for answering:

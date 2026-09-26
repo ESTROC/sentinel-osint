@@ -1,0 +1,79 @@
+name: Capture UI Screenshots
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/web/**'
+      - '.github/workflows/ui-screenshots.yml'
+      - 'README.md'
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install frontend dependencies
+        working-directory: apps/web
+        run: |
+          npm install
+          npm install --no-save playwright
+
+      - name: Install Chromium
+        working-directory: apps/web
+        run: npx playwright install --with-deps chromium
+
+      - name: Build frontend
+        working-directory: apps/web
+        run: npm run build
+
+      - name: Start frontend
+        working-directory: apps/web
+        run: |
+          npm run start -- -H 0.0.0.0 -p 3000 > /tmp/sentinel-web.log 2>&1 &
+          echo $! > /tmp/sentinel-web.pid
+
+      - name: Wait for frontend
+        run: |
+          for i in {1..60}; do
+            if curl -fsS http://127.0.0.1:3000 >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+          cat /tmp/sentinel-web.log
+          exit 1
+
+      - name: Capture screenshots
+        working-directory: apps/web
+        run: node scripts/capture-screenshots.mjs
+
+      - name: Upload screenshots artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sentinel-osint-ui-screenshots
+          path: docs/screenshots/*.jpg
+          if-no-files-found: error
+
+      - name: Commit refreshed screenshots
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/screenshots/*.jpg
+          if git diff --cached --quiet; then
+            echo "Screenshots are unchanged."
+          else
+            git commit -m "docs: refresh UI screenshots [skip ci]"
+            git push
+          fi
