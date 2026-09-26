@@ -3,7 +3,7 @@ name: Bootstrap source
 on:
   push:
     paths:
-      - ".bootstrap/source.zip"
+      - ".bootstrap/source.b64"
 
 permissions:
   contents: write
@@ -17,9 +17,10 @@ jobs:
           fetch-depth: 0
       - name: Expand source archive
         run: |
-          rm -rf /tmp/sentinel-source
+          rm -rf /tmp/sentinel-source /tmp/sentinel-source.zip
           mkdir -p /tmp/sentinel-source
-          unzip -q .bootstrap/source.zip -d /tmp/sentinel-source
+          base64 --decode .bootstrap/source.b64 > /tmp/sentinel-source.zip
+          unzip -q /tmp/sentinel-source.zip -d /tmp/sentinel-source
           rsync -a /tmp/sentinel-source/sentinel-osint-production/ ./ --exclude '.git'
           rm -rf .bootstrap
           rm -f .github/workflows/bootstrap.yml
